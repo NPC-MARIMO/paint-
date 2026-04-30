@@ -9,7 +9,7 @@ const testimonials = [
     id: 1,
     name: "Sarah Mitchell",
     role: "Interior Designer",
-    content: "The color accuracy and coverage quality of Spectrum paints are unmatched. My clients are always thrilled with the results. The Premium Interior Matte is my go-to for every project.",
+    content: "The color accuracy and coverage quality of Ashirwaad Coating paints are unmatched. My clients are always thrilled with the results. The Premium Interior Matte is my go-to for every project.",
     rating: 5,
     initials: "SM",
     gradient: "from-gold/20 to-gold/5"
@@ -27,7 +27,7 @@ const testimonials = [
     id: 3,
     name: "Jennifer Adams",
     role: "DIY Enthusiast",
-    content: "As a first-time painter, I was nervous about my project. The Spectrum team at my local dealer helped me choose the perfect colors and products. The results exceeded my expectations!",
+    content: "As a first-time painter, I was nervous about my project. The Ashirwaad Coating team at my local dealer helped me choose the perfect colors and products. The results exceeded my expectations!",
     rating: 5,
     initials: "JA",
     gradient: "from-navy/10 to-navy/5"

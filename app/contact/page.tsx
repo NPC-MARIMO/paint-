@@ -93,10 +93,9 @@ export default function ContactPage() {
           >
             {/* Contact Cards */}
             {[
-              { icon: Phone, title: "Phone", info: "1-800-555-0123", subInfo: "Mon-Fri 8AM-6PM EST" },
-              { icon: Mail, title: "Email", info: "hello@spectrumpaints.com", subInfo: "We reply within 24 hours" },
-              { icon: MapPin, title: "Headquarters", info: "123 Color Street", subInfo: "San Francisco, CA 94102" },
-              { icon: Clock, title: "Business Hours", info: "Monday - Friday", subInfo: "8:00 AM - 6:00 PM EST" },
+              { icon: Phone, title: "Phone", info: "9835256295", subInfo: "Mon-Fri 8AM-6PM EST" },
+              { icon: Mail, title: "Email", info: "ashirwad.coating@rediffmail.com", subInfo: "We reply within 24 hours" },
+              { icon: MapPin, title: "Location", info: "Plot 1461, sector 38, HSIIDC, Phase 1, IndL. Estate Rai", subInfo: "Sonipat Harayana 131029" },
             ].map((item, index) => (
               <div key={item.title} className="flex gap-4">
                 <div className="w-12 h-12 rounded-xl bg-navy/10 flex items-center justify-center flex-shrink-0">

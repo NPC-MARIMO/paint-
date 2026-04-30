@@ -32,7 +32,7 @@ export default function PrivacyPage() {
           <section className="mb-10">
             <h2 className="text-2xl font-bold text-navy mb-4">Introduction</h2>
             <p className="text-charcoal/80 leading-relaxed">
-              Spectrum Paints (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy. 
+              Ashirwaad Coating Paints (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy. 
               This Privacy Policy explains how we collect, use, disclose, and safeguard your 
               information when you visit our website, mobile application, or make a purchase 
               from us.
@@ -133,11 +133,11 @@ export default function PrivacyPage() {
               If you have any questions about this Privacy Policy, please contact us at:
             </p>
             <div className="mt-4 p-4 bg-sand rounded-xl">
-              <p className="text-charcoal font-medium">Spectrum Paints</p>
-              <p className="text-charcoal/80">123 Color Street</p>
-              <p className="text-charcoal/80">San Francisco, CA 94102</p>
-              <p className="text-charcoal/80">Email: privacy@spectrumpaints.com</p>
-              <p className="text-charcoal/80">Phone: 1-800-555-0123</p>
+              <p className="text-charcoal font-medium">Ashirwaad Coating Paints</p>
+              <p className="text-charcoal/80">Plot 1461, sector 38, HSIIDC, Phase 1, IndL. Estate Rai</p>
+              <p className="text-charcoal/80">Sonipat Haryana 131029</p>
+              <p className="text-charcoal/80">Email: ashirwad.coating@rediffmail.com</p>
+              <p className="text-charcoal/80">Phone: 9835256295</p>
             </div>
           </section>
         </motion.div>

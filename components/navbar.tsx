@@ -24,7 +24,6 @@ const navigation = [
   { name: "Colors", href: "/colors" },
   { name: "Inspiration", href: "/inspiration" },
   { name: "Guides", href: "/guides" },
-  { name: "Dealers", href: "/dealers" },
   { name: "Contact", href: "/contact" },
 ]
 
@@ -87,7 +86,7 @@ export function Navbar() {
             </motion.div>
             <div className="flex flex-col">
               <span className="text-xl font-bold text-white tracking-tight">
-                Spectrum
+                Ashirwaad Coating
               </span>
               <span className="text-[10px] text-gold/80 uppercase tracking-widest font-medium -mt-1">
                 Premium Paints

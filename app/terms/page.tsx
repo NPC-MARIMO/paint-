@@ -32,7 +32,7 @@ export default function TermsPage() {
           <section className="mb-10">
             <h2 className="text-2xl font-bold text-navy mb-4">Agreement to Terms</h2>
             <p className="text-charcoal/80 leading-relaxed">
-              By accessing and using the Spectrum Paints website and services, you agree to be 
+              By accessing and using the Ashirwaad Coating Paints website and services, you agree to be 
               bound by these Terms and Conditions and all applicable laws and regulations. If 
               you do not agree with any of these terms, you are prohibited from using or 
               accessing this site.
@@ -117,7 +117,7 @@ export default function TermsPage() {
           <section className="mb-10">
             <h2 className="text-2xl font-bold text-navy mb-4">Limitation of Liability</h2>
             <p className="text-charcoal/80 leading-relaxed">
-              In no event shall Spectrum Paints or its suppliers be liable for any damages 
+              In no event shall Ashirwaad Coating Paints or its suppliers be liable for any damages 
               (including, without limitation, damages for loss of data or profit, or due to 
               business interruption) arising out of the use or inability to use the materials 
               on our website, even if we have been notified of the possibility of such damage.
@@ -128,7 +128,7 @@ export default function TermsPage() {
             <h2 className="text-2xl font-bold text-navy mb-4">Intellectual Property</h2>
             <p className="text-charcoal/80 leading-relaxed">
               All content on this website, including text, graphics, logos, images, and 
-              software, is the property of Spectrum Paints or its content suppliers and is 
+              software, is the property of Ashirwaad Coating Paints or its content suppliers and is 
               protected by international copyright laws. The compilation of all content on 
               this site is our exclusive property.
             </p>
@@ -159,11 +159,11 @@ export default function TermsPage() {
               Questions about the Terms of Service should be sent to us at:
             </p>
             <div className="mt-4 p-4 bg-sand rounded-xl">
-              <p className="text-charcoal font-medium">Spectrum Paints</p>
-              <p className="text-charcoal/80">123 Color Street</p>
-              <p className="text-charcoal/80">San Francisco, CA 94102</p>
-              <p className="text-charcoal/80">Email: legal@spectrumpaints.com</p>
-              <p className="text-charcoal/80">Phone: 1-800-555-0123</p>
+              <p className="text-charcoal font-medium">Ashirwaad Coating Paints</p>
+              <p className="text-charcoal/80">Plot 1461, sector 38, HSIIDC, Phase 1, IndL. Estate Rai</p>
+              <p className="text-charcoal/80">Sonipat Haryana 131029</p>
+              <p className="text-charcoal/80">Email: legal@Ashirwaad Coatingpaints.com</p>
+              <p className="text-charcoal/80">Phone: 9835256295</p>
             </div>
           </section>
         </motion.div>

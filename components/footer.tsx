@@ -15,7 +15,6 @@ const footerLinks = {
     { name: "Color Explorer", href: "/colors" },
     { name: "Inspiration Gallery", href: "/inspiration" },
     { name: "Painting Guides", href: "/guides" },
-    { name: "Find a Dealer", href: "/dealers" },
   ],
   company: [
     { name: "About Us", href: "/about" },
@@ -108,7 +107,7 @@ export function Footer() {
                 <span className="text-navy font-bold text-xl">S</span>
               </motion.div>
               <div className="flex flex-col">
-                <span className="text-xl font-bold">Spectrum</span>
+                <span className="text-xl font-bold">Ashirwaad Coating</span>
                 <span className="text-[10px] text-white/40 uppercase tracking-widest">Premium Paints</span>
               </div>
             </Link>
@@ -119,24 +118,24 @@ export function Footer() {
             {/* Contact Info */}
             <div className="mt-8 space-y-4">
               <motion.a 
-                href="tel:1-800-555-0123" 
+                href="tel:9835256295" 
                 whileHover={{ x: 5 }}
                 className="flex items-center gap-3 text-white/50 hover:text-gold transition-colors group"
               >
                 <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-gold/10 transition-colors">
                   <Phone className="h-4 w-4" />
                 </div>
-                <span>1-800-555-0123</span>
+                <span>9835256295</span>
               </motion.a>
               <motion.a 
-                href="mailto:hello@spectrumpaints.com" 
+                href="mailto:ashirwad.coating@rediffmail.com" 
                 whileHover={{ x: 5 }}
                 className="flex items-center gap-3 text-white/50 hover:text-gold transition-colors group"
               >
                 <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-gold/10 transition-colors">
                   <Mail className="h-4 w-4" />
                 </div>
-                <span>hello@spectrumpaints.com</span>
+                <span>ashirwad.coating@rediffmail.com</span>
               </motion.a>
               <motion.div 
                 whileHover={{ x: 5 }}
@@ -145,7 +144,7 @@ export function Footer() {
                 <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0">
                   <MapPin className="h-4 w-4" />
                 </div>
-                <span>123 Color Street<br />San Francisco, CA 94102</span>
+                <span>Plot 1461, sector 38, HSIIDC, Phase 1, IndL. Estate Rai<br />Sonipat Haryana 131029</span>
               </motion.div>
             </div>
           </div>
@@ -229,7 +228,7 @@ export function Footer() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-white/30 text-sm">
-              © {new Date().getFullYear()} Spectrum Paints. All rights reserved.
+              © {new Date().getFullYear()} Ashirwaad Coating Paints. All rights reserved.
             </p>
             <div className="flex items-center gap-2">
               {socialLinks.map((link) => (

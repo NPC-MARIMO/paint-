@@ -107,7 +107,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                       style={{ backgroundColor: colorMap[selectedColor] || "#F5F5F5" }}
                     />
                     <div className="absolute inset-x-6 top-6 h-10 bg-navy/10 rounded flex items-center justify-center">
-                      <span className="text-sm font-bold text-navy uppercase tracking-wider">Spectrum</span>
+                      <span className="text-sm font-bold text-navy uppercase tracking-wider">Ashirwaad Coating</span>
                     </div>
                     <div className="absolute inset-x-6 top-18 text-center">
                       <p className="text-[10px] text-charcoal/60 uppercase tracking-wide">{product.finish}</p>

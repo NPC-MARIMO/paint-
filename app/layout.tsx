@@ -14,16 +14,16 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Spectrum Paints | Premium Quality Paint & Coatings",
-    template: "%s | Spectrum Paints"
+    default: "Ashirwaad Coating Paints | Premium Quality Paint & Coatings",
+    template: "%s | Ashirwaad Coating Paints"
   },
-  description: "Discover premium quality paints for interior and exterior projects. Explore our color collection, find inspiration, and transform your space with Spectrum Paints.",
+  description: "Discover premium quality paints for interior and exterior projects. Explore our color collection, find inspiration, and transform your space with Ashirwaad Coating Paints.",
   keywords: ["paint", "interior paint", "exterior paint", "home improvement", "color palette", "primers", "coatings"],
-  authors: [{ name: "Spectrum Paints" }],
+  authors: [{ name: "Ashirwaad Coating Paints" }],
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Spectrum Paints",
+    siteName: "Ashirwaad Coating Paints",
   },
 }
 

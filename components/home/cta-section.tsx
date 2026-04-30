@@ -68,7 +68,7 @@ export function CTASection() {
               <span className="block text-gradient mt-2">Your Space?</span>
             </h2>
             <p className="mt-8 text-xl text-white/60 max-w-lg leading-relaxed">
-              Visit your nearest dealer or contact our color experts for personalized advice. 
+              Contact our color experts for personalized advice. 
               We&apos;re here to help you find the perfect colors for your project.
             </p>
 
@@ -79,19 +79,6 @@ export function CTASection() {
               transition={{ delay: 0.3 }}
               className="flex flex-col sm:flex-row gap-4 mt-10"
             >
-              <Link
-                href="/dealers"
-                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-gold text-navy font-semibold rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-gold/30"
-              >
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0"
-                  animate={{ x: ["-100%", "100%"] }}
-                  transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 2 }}
-                />
-                <MapPin className="h-5 w-5 relative z-10" />
-                <span className="relative z-10">Find a Dealer</span>
-                <ArrowRight className="h-5 w-5 relative z-10 group-hover:translate-x-1 transition-transform" />
-              </Link>
               <Link
                 href="/contact"
                 className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-white/5 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-2xl hover:bg-white/10 hover:border-white/30 transition-all duration-300"

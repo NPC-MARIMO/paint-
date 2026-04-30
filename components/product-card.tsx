@@ -129,7 +129,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
                     style={{ backgroundColor: colorMap[product.colors[0]] || "#F5F5F5" }}
                   />
                   <div className="absolute inset-x-3 top-3 h-5 bg-navy/10 rounded flex items-center justify-center">
-                    <span className="text-[7px] font-bold text-navy uppercase tracking-wider">Spectrum</span>
+                    <span className="text-[7px] font-bold text-navy uppercase tracking-wider">Ashirwaad Coating</span>
                   </div>
                 </div>
                 

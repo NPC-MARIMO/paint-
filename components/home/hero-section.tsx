@@ -299,7 +299,7 @@ export function HeroSection() {
                       <div className="w-12 h-12 rounded-xl bg-navy flex items-center justify-center mb-3">
                         <span className="text-gold font-bold text-lg">S</span>
                       </div>
-                      <span className="text-xs font-bold text-navy uppercase tracking-[0.2em]">Spectrum</span>
+                      <span className="text-xs font-bold text-navy uppercase tracking-[0.2em]">Ashirwaad Coating</span>
                       <span className="text-[10px] text-charcoal/50 mt-1">Premium Paint</span>
                       
                       {/* Color indicator */}
