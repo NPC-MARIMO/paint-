@@ -1,5 +1,7 @@
 "use client"
 
+export const dynamic = "force-dynamic"
+
 import { useState, useMemo, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
@@ -12,22 +14,25 @@ type SortOption = "featured" | "price-asc" | "price-desc" | "rating" | "name"
 
 export default function ShopPage() {
   const searchParams = useSearchParams()
-  const categoryParam = searchParams.get("category")
-  
+
+  // SAFE INITIAL STATE (no runtime dependency)
   const [filters, setFilters] = useState({
-    category: categoryParam || "all",
+    category: "all",
     finish: "all",
     priceRange: [0, 999] as [number, number],
   })
+
   const [sortBy, setSortBy] = useState<SortOption>("featured")
   const [isFilterOpen, setIsFilterOpen] = useState(false)
   const [gridCols, setGridCols] = useState<2 | 3>(3)
 
+  // APPLY URL PARAMS AFTER MOUNT (runtime safe)
   useEffect(() => {
+    const categoryParam = searchParams.get("category")
     if (categoryParam) {
       setFilters(prev => ({ ...prev, category: categoryParam }))
     }
-  }, [categoryParam])
+  }, [searchParams])
 
   const handleFilterChange = (key: string, value: string | [number, number]) => {
     setFilters(prev => ({ ...prev, [key]: value }))
@@ -36,22 +41,18 @@ export default function ShopPage() {
   const filteredProducts = useMemo(() => {
     let result = [...products]
 
-    // Category filter
     if (filters.category !== "all") {
       result = result.filter(p => p.category === filters.category)
     }
 
-    // Finish filter
     if (filters.finish !== "all") {
       result = result.filter(p => p.finish === filters.finish)
     }
 
-    // Price filter
     result = result.filter(
       p => p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1]
     )
 
-    // Sorting
     switch (sortBy) {
       case "price-asc":
         result.sort((a, b) => a.price - b.price)
@@ -66,7 +67,6 @@ export default function ShopPage() {
         result.sort((a, b) => a.name.localeCompare(b.name))
         break
       default:
-        // Featured - best sellers first
         result.sort((a, b) => (b.isBestSeller ? 1 : 0) - (a.isBestSeller ? 1 : 0))
     }
 
@@ -76,7 +76,7 @@ export default function ShopPage() {
   return (
     <div className="min-h-screen bg-warm-gradient pt-28 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -92,7 +92,7 @@ export default function ShopPage() {
         </motion.div>
 
         <div className="flex gap-8">
-          {/* Desktop Sidebar */}
+
           <FilterSidebar
             isOpen={true}
             onClose={() => {}}
@@ -100,7 +100,6 @@ export default function ShopPage() {
             onFilterChange={handleFilterChange}
           />
 
-          {/* Mobile Sidebar */}
           <FilterSidebar
             isOpen={isFilterOpen}
             onClose={() => setIsFilterOpen(false)}
@@ -109,9 +108,8 @@ export default function ShopPage() {
             isMobile
           />
 
-          {/* Main Content */}
           <div className="flex-1">
-            {/* Toolbar */}
+
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -119,7 +117,6 @@ export default function ShopPage() {
               className="card-warm rounded-xl p-4 shadow-sm mb-6 flex items-center justify-between gap-4"
             >
               <div className="flex items-center gap-4">
-                {/* Mobile filter button */}
                 <button
                   onClick={() => setIsFilterOpen(true)}
                   className="lg:hidden flex items-center gap-2 px-4 py-2 border border-stone rounded-lg hover:bg-sand transition-colors"
@@ -129,12 +126,14 @@ export default function ShopPage() {
                 </button>
 
                 <p className="text-sm text-muted-foreground">
-                  <span className="font-medium text-charcoal">{filteredProducts.length}</span> products
+                  <span className="font-medium text-charcoal">
+                    {filteredProducts.length}
+                  </span>{" "}
+                  products
                 </p>
               </div>
 
               <div className="flex items-center gap-4">
-                {/* Sort */}
                 <div className="flex items-center gap-2">
                   <ArrowUpDown className="h-4 w-4 text-muted-foreground hidden sm:block" />
                   <select
@@ -150,11 +149,10 @@ export default function ShopPage() {
                   </select>
                 </div>
 
-                {/* Grid toggle - desktop only */}
                 <div className="hidden md:flex items-center gap-1 border-l border-border pl-4">
                   <button
                     onClick={() => setGridCols(2)}
-                    className={`p-2 rounded-lg transition-colors ${
+                    className={`p-2 rounded-lg ${
                       gridCols === 2 ? "bg-navy text-white" : "hover:bg-sand"
                     }`}
                   >
@@ -162,7 +160,7 @@ export default function ShopPage() {
                   </button>
                   <button
                     onClick={() => setGridCols(3)}
-                    className={`p-2 rounded-lg transition-colors ${
+                    className={`p-2 rounded-lg ${
                       gridCols === 3 ? "bg-navy text-white" : "hover:bg-sand"
                     }`}
                   >
@@ -172,13 +170,14 @@ export default function ShopPage() {
               </div>
             </motion.div>
 
-            {/* Products Grid */}
             {filteredProducts.length > 0 ? (
-              <div className={`grid gap-6 ${
-                gridCols === 2 
-                  ? "grid-cols-1 sm:grid-cols-2" 
-                  : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-              }`}>
+              <div
+                className={`grid gap-6 ${
+                  gridCols === 2
+                    ? "grid-cols-1 sm:grid-cols-2"
+                    : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                }`}
+              >
                 {filteredProducts.map((product, index) => (
                   <ProductCard key={product.id} product={product} index={index} />
                 ))}
@@ -193,11 +192,13 @@ export default function ShopPage() {
                   No products match your filters.
                 </p>
                 <button
-                  onClick={() => setFilters({
-                    category: "all",
-                    finish: "all",
-                    priceRange: [0, 999]
-                  })}
+                  onClick={() =>
+                    setFilters({
+                      category: "all",
+                      finish: "all",
+                      priceRange: [0, 999],
+                    })
+                  }
                   className="mt-4 text-navy font-medium hover:text-gold transition-colors"
                 >
                   Clear all filters
