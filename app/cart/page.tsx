@@ -1,10 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Minus, Plus, Trash2, ShoppingBag, ArrowRight, Truck, Shield, Tag } from "lucide-react"
 import { useCartStore, type CartItem } from "@/lib/cart-store"
+import { useUserStore } from "@/lib/user-store"
 import { cn } from "@/lib/utils"
 
 const colorMap: Record<string, string> = {
@@ -22,21 +23,85 @@ const colorMap: Record<string, string> = {
 
 export default function CartPage() {
   const { items, updateQuantity, removeItem, getTotalPrice, clearCart } = useCartStore()
+  const { user, token } = useUserStore()
   const [promoCode, setPromoCode] = useState("")
   const [isCheckingOut, setIsCheckingOut] = useState(false)
+
+  const [formData, setFormData] = useState({
+    name: user?.name || "",
+    email: user?.email || "",
+    phone: user?.number || "",
+    address: "",
+    city: "",
+    state: "",
+    pincode: ""
+  })
+
+  useEffect(() => {
+    if (user) {
+      setFormData(prev => ({
+        ...prev,
+        name: user.name,
+        email: user.email,
+        phone: String(user.number || prev.phone)
+      }))
+    }
+  }, [user])
 
   const subtotal = getTotalPrice()
   const shipping = subtotal >= 99 ? 0 : 9.99
   const tax = subtotal * 0.0875 // 8.75% tax
   const total = subtotal + shipping + tax
 
-  const handleCheckout = async () => {
+  const handleCheckout = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    
+    if (!formData.name || !formData.email || !formData.phone || !formData.address || !formData.city || !formData.pincode) {
+      alert("Please fill in all shipping details");
+      return;
+    }
+
     setIsCheckingOut(true)
-    // Simulate checkout process
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    setIsCheckingOut(false)
-    // In a real app, this would redirect to a checkout page or payment processor
-    alert("Checkout functionality would be implemented with a payment processor.")
+    
+    try {
+      const customerInfo = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
+        city: formData.city,
+        state: formData.state,
+        pincode: formData.pincode
+      };
+
+      const orderItems = items.map(item => ({
+        productId: item.product.slug || item.product.id,
+        quantity: item.quantity,
+        selectedColor: item.selectedColor
+      }));
+
+      const res = await fetch("http://localhost:8080/api/orders", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          ...(token ? { "Authorization": `Bearer ${token}` } : {})
+        },
+        body: JSON.stringify({ customerInfo, items: orderItems, paymentMethod: 'cod' })
+      });
+
+      if (res.ok) {
+        alert("Order placed successfully! Check the Admin Dashboard to see it.");
+        clearCart();
+      } else {
+        const data = await res.json();
+        alert(`Checkout failed: ${data.message}`);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error placing order. Make sure backend is running on port 8080.");
+    } finally {
+      setIsCheckingOut(false);
+    }
   }
 
   if (items.length === 0) {
@@ -112,6 +177,41 @@ export default function CartPage() {
                   />
                 ))}
               </AnimatePresence>
+            </div>
+
+            {/* Shipping Form */}
+            <div className="card-warm rounded-2xl shadow-sm mt-8 p-6 lg:p-8">
+              <h2 className="text-xl font-bold text-navy mb-6">Shipping Details</h2>
+              <form id="checkout-form" onSubmit={handleCheckout} className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-charcoal mb-1.5">Full Name</label>
+                    <input required type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-stone bg-sand focus:bg-warm-white focus:border-navy focus:ring-1 focus:ring-navy transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-charcoal mb-1.5">Email Address</label>
+                    <input required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-stone bg-sand focus:bg-warm-white focus:border-navy focus:ring-1 focus:ring-navy transition-all" />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-charcoal mb-1.5">Phone Number</label>
+                  <input required type="tel" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-stone bg-sand focus:bg-warm-white focus:border-navy focus:ring-1 focus:ring-navy transition-all" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-charcoal mb-1.5">Street Address</label>
+                  <input required type="text" value={formData.address} onChange={e => setFormData({...formData, address: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-stone bg-sand focus:bg-warm-white focus:border-navy focus:ring-1 focus:ring-navy transition-all" />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-charcoal mb-1.5">City</label>
+                    <input required type="text" value={formData.city} onChange={e => setFormData({...formData, city: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-stone bg-sand focus:bg-warm-white focus:border-navy focus:ring-1 focus:ring-navy transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-charcoal mb-1.5">PIN Code</label>
+                    <input required type="text" value={formData.pincode} onChange={e => setFormData({...formData, pincode: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-stone bg-sand focus:bg-warm-white focus:border-navy focus:ring-1 focus:ring-navy transition-all" />
+                  </div>
+                </div>
+              </form>
             </div>
 
             {/* Continue Shopping */}
@@ -191,7 +291,8 @@ export default function CartPage() {
 
               {/* Checkout Button */}
               <button
-                onClick={handleCheckout}
+                type="submit"
+                form="checkout-form"
                 disabled={isCheckingOut}
                 className="w-full mt-6 px-8 py-4 bg-navy text-white font-semibold rounded-xl hover:bg-navy/90 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
@@ -202,7 +303,7 @@ export default function CartPage() {
                   </>
                 ) : (
                   <>
-                    Proceed to Checkout
+                    Place Order (Cash on Delivery)
                     <ArrowRight className="h-5 w-5" />
                   </>
                 )}

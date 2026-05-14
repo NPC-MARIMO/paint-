@@ -23,7 +23,7 @@ const priceRanges = [
   { label: "Under $50", value: "0-50" },
   { label: "$50 - $75", value: "50-75" },
   { label: "$75 - $100", value: "75-100" },
-  { label: "Over $100", value: "100-999" },
+  { label: "Over $100", value: "100-99999" },
 ]
 
 export function FilterSidebar({ 
@@ -108,12 +108,12 @@ export function FilterSidebar({
               label={range.label}
               isActive={
                 range.value === "all" 
-                  ? filters.priceRange[0] === 0 && filters.priceRange[1] === 999
+                  ? filters.priceRange[0] === 0 && filters.priceRange[1] === 99999
                   : `${filters.priceRange[0]}-${filters.priceRange[1]}` === range.value
               }
               onClick={() => {
                 if (range.value === "all") {
-                  onFilterChange("priceRange", [0, 999])
+                  onFilterChange("priceRange", [0, 99999])
                 } else {
                   const [min, max] = range.value.split("-").map(Number)
                   onFilterChange("priceRange", [min, max])

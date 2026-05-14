@@ -6,7 +6,7 @@ import { useState, useMemo, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
 import { SlidersHorizontal, Grid3X3, LayoutGrid, ArrowUpDown } from "lucide-react"
-import { products } from "@/data/products"
+import { products as staticProducts } from "@/data/products"
 import { ProductCard } from "@/components/product-card"
 import { FilterSidebar } from "@/components/filter-sidebar"
 
@@ -19,12 +19,40 @@ export default function ShopPage() {
   const [filters, setFilters] = useState({
     category: "all",
     finish: "all",
-    priceRange: [0, 999] as [number, number],
+    priceRange: [0, 99999] as [number, number],
   })
 
   const [sortBy, setSortBy] = useState<SortOption>("featured")
   const [isFilterOpen, setIsFilterOpen] = useState(false)
   const [gridCols, setGridCols] = useState<2 | 3>(3)
+
+  const [dbProducts, setDbProducts] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("http://localhost:8080/api/products")
+        if (res.ok) {
+          const data = await res.json()
+          const mapped = data.products.map((p: any) => ({
+            ...p,
+            id: p._id || p.slug,
+            image: p.image && p.image.startsWith('/uploads') ? `http://localhost:8080${p.image}` : p.image
+          }))
+          setDbProducts(mapped)
+        } else {
+          setDbProducts(staticProducts)
+        }
+      } catch (err) {
+        console.error("Failed to fetch products:", err)
+        setDbProducts(staticProducts)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchProducts()
+  }, [])
 
   // APPLY URL PARAMS AFTER MOUNT (runtime safe)
   useEffect(() => {
@@ -39,7 +67,7 @@ export default function ShopPage() {
   }
 
   const filteredProducts = useMemo(() => {
-    let result = [...products]
+    let result = [...dbProducts]
 
     if (filters.category !== "all") {
       result = result.filter(p => p.category === filters.category)
@@ -71,7 +99,7 @@ export default function ShopPage() {
     }
 
     return result
-  }, [filters, sortBy])
+  }, [filters, sortBy, dbProducts])
 
   return (
     <div className="min-h-screen bg-warm-gradient pt-28 pb-20">
@@ -170,7 +198,11 @@ export default function ShopPage() {
               </div>
             </motion.div>
 
-            {filteredProducts.length > 0 ? (
+            {loading ? (
+              <div className="flex justify-center items-center py-20">
+                <div className="w-8 h-8 border-4 border-navy border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            ) : filteredProducts.length > 0 ? (
               <div
                 className={`grid gap-6 ${
                   gridCols === 2
@@ -196,7 +228,7 @@ export default function ShopPage() {
                     setFilters({
                       category: "all",
                       finish: "all",
-                      priceRange: [0, 999],
+                      priceRange: [0, 99999],
                     })
                   }
                   className="mt-4 text-navy font-medium hover:text-gold transition-colors"
