@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from "react"
 import Link from "next/link"
+import { Logo } from "@/components/logo"
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion"
 import { ArrowRight, Play, Sparkles } from "lucide-react"
 
@@ -296,8 +297,8 @@ export function HeroSection() {
                     {/* Label area */}
                     <div className="absolute top-16 inset-x-6 bottom-8 bg-white/90 rounded-2xl flex flex-col items-center justify-center p-4">
                       {/* Logo */}
-                      <div className="w-12 h-12 rounded-xl bg-navy flex items-center justify-center mb-3">
-                        <span className="text-gold font-bold text-lg">S</span>
+                      <div className="w-12 h-12 rounded-xl overflow-hidden mb-3">
+                        <Logo className="h-full w-full object-cover" />
                       </div>
                       <span className="text-xs font-bold text-navy uppercase tracking-[0.2em]">Ashirwaad Coating</span>
                       <span className="text-[10px] text-charcoal/50 mt-1">Premium Paint</span>

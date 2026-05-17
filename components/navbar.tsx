@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ShoppingCart, ChevronDown, Sparkles, UserCircle, LogOut, Package } from "lucide-react"
 import { useCartStore } from "@/lib/cart-store"
 import { useUserStore } from "@/lib/user-store"
+import { Logo } from "@/components/logo"
 import { cn } from "@/lib/utils"
 
 const navigation = [
@@ -89,7 +90,7 @@ export function Navbar() {
                 animate={{ x: ["-100%", "100%"] }}
                 transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
               />
-              <span className="text-navy font-bold text-xl relative z-10">S</span>
+              <Logo className="relative z-10 h-full w-full object-cover" />
             </motion.div>
             <div className="flex flex-col">
               <span className="text-xl font-bold text-white tracking-tight">

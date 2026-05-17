@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { Logo } from "@/components/logo"
 import { motion } from "framer-motion"
 import { Facebook, Instagram, Youtube, Twitter, Mail, Phone, MapPin, ArrowRight, Sparkles } from "lucide-react"
 
@@ -102,9 +103,9 @@ export function Footer() {
             <Link href="/" className="inline-flex items-center gap-3 group">
               <motion.div 
                 whileHover={{ scale: 1.05, rotate: 5 }}
-                className="h-12 w-12 rounded-xl bg-gradient-to-br from-gold to-gold/80 flex items-center justify-center"
+                className="h-12 w-12 rounded-xl bg-gradient-to-br from-gold to-gold/80 flex items-center justify-center overflow-hidden"
               >
-                <span className="text-navy font-bold text-xl">S</span>
+                <Logo className="h-full w-full object-cover" containerClassName="h-full w-full" />
               </motion.div>
               <div className="flex flex-col">
                 <span className="text-xl font-bold">Ashirwaad Coating</span>
